@@ -2,9 +2,8 @@ manifest:
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
-    - name: trentrand
-      url-base: https://github.com/trentrand
-    - name: mctechnology17
+    - name: mygithub
+      url-base: https://github.com/maru-x
       url-base: https://github.com/mctechnology17
   projects:
     - name: zmk
@@ -12,7 +11,7 @@ manifest:
       revision: main
       import: app/west.yml
     - name: zmk-pmw3360-driver
-      remote: trentrand
+      remote: mygithub
       revision: main
     - name: zmk-nice-oled
       remote: mctechnology17
