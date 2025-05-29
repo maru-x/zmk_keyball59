@@ -63,9 +63,9 @@
         inversion-on;
         prechargep = <0x22>;
     };
-
-    &left_encoder {
-        status = "okay";
-    };
-    
 };
+
+&left_encoder {
+    status = "okay";
+};
+    
