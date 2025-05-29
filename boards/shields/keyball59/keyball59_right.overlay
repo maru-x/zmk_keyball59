@@ -105,7 +105,7 @@
     trackball: trackball@0 {
         status            = "okay";
         /* センサーを PMW3360 に変更 */
-        compatible        = "pixart,pmw3610";
+        compatible        = "pixart,pmw3360";
         reg               = <0>;
         spi-max-frequency = <2000000>;
 
