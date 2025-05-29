@@ -3,7 +3,8 @@ id: kayball59
 name: kayball59
 type: shield
 url: https://github.com/Yowkees/keyball
-requires: [pro_micro]
+requires:
+  - nice_nano
 features:
   - keys
   - pointer
