@@ -113,7 +113,7 @@
         irq-gpios         = <&gpio0  6 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
 
         /* あとのレイヤー設定もそのまま */
-        automouse-layer   = <4>;
+ /*       automouse-layer   = <4>;*/
         scroll-layers     = <5>;
         snipe-layers      = <6>;
     };
