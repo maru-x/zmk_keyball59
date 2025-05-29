@@ -6,17 +6,16 @@ properties:
 
   # ここから追記 ↓↓
   automouse-layer:
+    type: int
+    required: false
     description: "Trackball 操作中に自動的にアクティブにするレイヤー番号"
-    type: integer
 
   scroll-layers:
+    type: int
+    required: false
     description: "スクロールモード時に切り替えるレイヤー一覧"
-    type: array
-    items:
-      type: integer
 
   snipe-layers:
+    type: int
+    required: false
     description: "スナイプ（精密移動）モード時に切り替えるレイヤー一覧"
-    type: array
-    items:
-      type: integer
