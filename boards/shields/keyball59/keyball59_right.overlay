@@ -109,6 +109,9 @@
         reg               = <0>;
         spi-max-frequency = <2000000>;
 
+        /* IRQ ピン（割り込み入力） */
+        irq-gpios         = <&gpio0  6 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+
         /* あとのレイヤー設定もそのまま */
         automouse-layer   = <4>;
         scroll-layers     = <5>;
