@@ -1,0 +1,22 @@
+properties:
+  irq-gpios:
+    $ref: /include/dt-bindings/gpio/gpio.yaml#/definitions/gpio-controller
+  cs-gpios:
+    $ref: /include/dt-bindings/gpio/gpio.yaml#/definitions/gpio-controller
+
+  # ここから追記 ↓↓
+  automouse-layer:
+    description: "Trackball 操作中に自動的にアクティブにするレイヤー番号"
+    type: integer
+
+  scroll-layers:
+    description: "スクロールモード時に切り替えるレイヤー一覧"
+    type: array
+    items:
+      type: integer
+
+  snipe-layers:
+    description: "スナイプ（精密移動）モード時に切り替えるレイヤー一覧"
+    type: array
+    items:
+      type: integer
