@@ -111,46 +111,11 @@
 		rotate-90;
 	};
 
-//    status       = "okay";
-//    compatible   = "nordic,nrf-spim";
-//    pinctrl-0    = <&spi1_default>;
-//    pinctrl-1    = <&spi1_sleep>;
-//    pinctrl-names= "default", "sleep";
-
-    /* チップセレクト (NCS) = P0.06 */
-//    cs-gpios = <&gpio0 6 GPIO_ACTIVE_LOW>;
-
-//    trackball: trackball@0 {
-//        status            = "okay";
-        /* センサーを PMW3360 に変更 */
-//        compatible        = "pixart,pmw3610";
-//        reg               = <0>;
-//        spi-max-frequency = <2000000>;
-
-        /* IRQ ピン（割り込み入力） */
-//        irq-gpios         = <&gpio0  5 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-
-        /* あとのレイヤー設定もそのまま */
-//        automouse-layer   = <4>;
-//        scroll-layers     = <5>;
-//        snipe-layers      = <6>;
-//    };
-
 };
 
 &right_encoder {
     status = "okay";
 };
-
-
-// / {
-//  trackball_listener {
-//    compatible = "zmk,input-listener";
-//    device = <&trackball>;
-
-//  };
-//};
-
 
 / {
 	mouse_listener {
