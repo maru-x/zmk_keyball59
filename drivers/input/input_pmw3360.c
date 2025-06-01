@@ -196,6 +196,11 @@ static int pmw3360_init_irq(const struct device *dev) {
 }
 
 static void pmw3360_read_motion_report(const struct device *dev) {
+    struct pmw3360_data *data = dev->data;
+    if (!data->ready) {
+        return;
+    }
+    
     struct motion_burst motion_report = {};
     pmw3360_spi_read_motion_burst(dev, (uint8_t *) &motion_report, sizeof(motion_report));
 
@@ -282,6 +287,13 @@ static void pmw3360_async_init(struct k_work *work) {
     int r2 = pmw3360_spi_read_reg(dev, PMW3360_REG_REVISION_ID, &revision_id);
 
     LOG_DBG("pmw3360 product %d (%d), resivion %d (%d)", product_id, r1, revision_id, r2);
+
+    // ここでチェックを追加
+    if (product_id != 0x66 || revision_id != 0x01) {
+        LOG_ERR("PMW3360 not detected! product_id=0x%02X, revision_id=0x%02X", product_id, revision_id);
+        data->ready = false;
+        return;
+    }
 
     k_mutex_lock(&data->mutex, K_FOREVER);
 
