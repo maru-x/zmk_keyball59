@@ -282,11 +282,11 @@ static void pmw3360_async_init(struct k_work *work) {
     // Log the sensor product and revision ID. We expect 0x66, 0x01
     uint8_t product_id = 0;
     int r1 = pmw3360_spi_read_reg(dev, PMW3360_REG_PRODUCT_ID, &product_id);
+    LOG_DBG("Read product_id: 0x%02X, result: %d", product_id, r1);
 
     uint8_t revision_id = 0;
     int r2 = pmw3360_spi_read_reg(dev, PMW3360_REG_REVISION_ID, &revision_id);
-
-    LOG_DBG("pmw3360 product %d (%d), resivion %d (%d)", product_id, r1, revision_id, r2);
+    LOG_DBG("Read revision_id: 0x%02X, result: %d", revision_id, r2);
 
     // ここでチェックを追加
     if (product_id != 0x66 || revision_id != 0x01) {
