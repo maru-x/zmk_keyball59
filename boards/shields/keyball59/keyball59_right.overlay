@@ -93,6 +93,25 @@
 };
 
 &spi1 {
+	status = "okay";
+    compatible   = "nordic,nrf-spim";
+    pinctrl-0    = <&spi1_default>;
+    pinctrl-1    = <&spi1_sleep>;
+    pinctrl-names= "default", "sleep";
+    cs-gpios = <&gpio0 6 GPIO_ACTIVE_LOW>;
+	mouse: mouse@0 {
+		compatible = "pixart,pmw3360";
+		status = "okay";
+		reg = <0>;
+		spi-max-frequency = <2000000>;
+
+		// pmw3360 driver parameters
+	//	irq-gpios = <&gpio0 27 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+		cpi = <600>;
+		rotate-90;
+	};
+
+/*
     status       = "okay";
     compatible   = "nordic,nrf-spim";
     pinctrl-0    = <&spi1_default>;
@@ -117,16 +136,26 @@
         scroll-layers     = <5>;
         snipe-layers      = <6>;
     };
+    */
 };
 
 &right_encoder {
     status = "okay";
 };
 
+/*
 / {
   trackball_listener {
     compatible = "zmk,input-listener";
     device = <&trackball>;
 
   };
+};
+*/
+
+/ {
+	mouse_listener {
+		compatible = "zmk,input-listener";
+		device = <&mouse>;
+	};
 };
