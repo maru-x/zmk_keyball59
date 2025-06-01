@@ -103,7 +103,7 @@
 		compatible = "pixart,pmw3360";
 		status = "okay";
 		reg = <0>;
-		spi-max-frequency = <2000000>;
+		spi-max-frequency = <500000>;
         	
 		cpi = <600>;
 		rotate-90;
