@@ -5,14 +5,20 @@ config ZMK_KEYBOARD_NAME
 
 config ZMK_SPLIT_ROLE_CENTRAL
 	default y
-
+    
+config SPI
+    default y
+    
 endif
 
 if SHIELD_KEYBALL59_LEFT || SHIELD_KEYBALL59_RIGHT
 
 config ZMK_SPLIT
 	default y
-	
+
+config ZMK_POINTING
+    default y	
+
 endif
 
 if ZMK_DISPLAY
