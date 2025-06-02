@@ -260,6 +260,9 @@ static void pmw3360_async_init(struct k_work *work) {
 
     // Power up sequence.
     // Step 2: drive the NCS high, then low to reset the SPI port.
+    k_msleep(40); 
+    gpio_pin_set_dt(&config->cs_gpio, GPIO_OUTPUT_INACTIVE);
+    k_msleep(40);     
     gpio_pin_set_dt(&config->cs_gpio, GPIO_OUTPUT_ACTIVE);
     k_msleep(40); 
     gpio_pin_set_dt(&config->cs_gpio, GPIO_OUTPUT_INACTIVE);
