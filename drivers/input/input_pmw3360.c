@@ -204,7 +204,7 @@ static void pmw3360_read_motion_report(const struct device *dev) {
         input_report_rel(dev, INPUT_REL_X, dx, false, K_FOREVER);
 
         const int32_t dy = (motion_report.delta_y_h << 8) | motion_report.delta_y_l;
-        input_report_rel(dev, INPUT_REL_Y, -dy, true, K_FOREVER);
+        input_report_rel(dev, INPUT_REL_Y, dy, true, K_FOREVER);
     }
 }
 
@@ -399,6 +399,5 @@ static const struct sensor_driver_api pmw3360_driver_api = {
     };                                                                                             \
     DEVICE_DT_INST_DEFINE(n, pmw3360_init, NULL, &data##n, &config##n, POST_KERNEL,                \
         CONFIG_INPUT_INIT_PRIORITY, &pmw3360_driver_api);
-_FOREACH_STATUS_OKAY(PMW3360_DEFINE)        CONFIG_INPUT_INIT_PRIORITY, &pmw3360_driver_api);
 
 DT_INST_FOREACH_STATUS_OKAY(PMW3360_DEFINE)
