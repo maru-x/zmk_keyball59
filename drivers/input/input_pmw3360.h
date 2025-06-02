@@ -99,6 +99,21 @@ struct pmw3360_config {
     uint32_t polling_interval;
 };
 
+struct pmw3360_config_ext {
+    struct spi_dt_spec spi;
+    struct gpio_dt_spec cs_gpio;
+    struct gpio_dt_spec irq_gpio;
+    uint16_t cpi;
+    bool rotate_90;
+    bool rotate_180;
+    bool rotate_270;
+    int8_t angle_tune;
+    bool lift_height_3mm;
+    uint32_t polling_interval;
+    uint32_t automouse_layer;
+    uint32_t automouse_timeout_ms;
+};
+
 #ifdef __cplusplus
 }
 #endif

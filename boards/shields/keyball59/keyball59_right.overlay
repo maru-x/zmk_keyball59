@@ -107,6 +107,8 @@
         	
 		cpi = <1200>;
 		rotate-90;
+        automouse-layer = <3>; // トラックボール操作時に切り替えるレイヤー番号
+        automouse-timeout-ms = <700>; // 元に戻るまでの時間（ミリ秒）
 	};
 
 };
