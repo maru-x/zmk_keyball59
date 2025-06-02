@@ -34,14 +34,3 @@ properties:
     type: int
     default: 1000
     description: "The time, in microseconds, to wait between sensor polls when operating without an irq configured."
-<<<<<<< HEAD
-=======
-  automouse-layer:
-    type: int
-    required: false
-    description: "Trackball操作時に自動でアクティブにするレイヤー番号"
-  automouse-timeout-ms:
-    type: int
-    required: false
-    description: "Trackball操作後に元のレイヤーへ戻すまでの時間（ミリ秒）"
->>>>>>> 15539bfc5c77ace375ad5c802c91dead4f199fde
