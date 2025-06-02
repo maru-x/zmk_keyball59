@@ -12,8 +12,6 @@
 #include <zephyr/logging/log.h>
 #include <zephyr/sys/util.h>
 #include "input_pmw3360.h"
-#include <zmk/layers.h>
-#include <zephyr/sys/atomic.h>
 
 LOG_MODULE_REGISTER(pmw3360, CONFIG_INPUT_LOG_LEVEL);
 
@@ -197,28 +195,14 @@ static int pmw3360_init_irq(const struct device *dev) {
     return err;
 }
 
-struct pmw3360_config_ext {
-    struct pmw3360_config base;
-    uint32_t automouse_layer;
-    uint32_t automouse_timeout_ms;
-};
-
-static atomic_t automouse_timer_active = ATOMIC_INIT(0);
-static uint32_t automouse_prev_layer = 0;
-static struct k_work_delayable automouse_timer_work;
-
-static void automouse_timer_handler(struct k_work *work) {
-    if (atomic_cas(&automouse_timer_active, 1, 0)) {
-        zmk_layer_deactivate(automouse_prev_layer);
-    }
-}
-
 static void pmw3360_read_motion_report(const struct device *dev) {
     struct motion_burst motion_report = {};
     pmw3360_spi_read_motion_burst(dev, (uint8_t *) &motion_report, sizeof(motion_report));
 
     if (motion_report.motion & PMW3360_MOTION_MOT) {
         const int32_t dx = (motion_report.delta_x_h << 8) | motion_report.delta_x_l;
+        input_report_rel(dev, INPUT_REL_X, dx, false, K_FOREVER);
+
         const int32_t dy = (motion_report.delta_y_h << 8) | motion_report.delta_y_l;
         input_report_rel(dev, INPUT_REL_Y, -dy, true, K_FOREVER);
     }
@@ -401,7 +385,7 @@ static const struct sensor_driver_api pmw3360_driver_api = {
 
 #define PMW3360_DEFINE(n)                                                                          \
     static struct pmw3360_data data##n = {};                                                       \
-    static const struct pmw3360_config_ext config##n = {                                           \
+    static const struct pmw3360_config config##n = {                                               \
         .spi = SPI_DT_SPEC_INST_GET(n, PMW3360_SPI_MODE, 0),                                       \
         .cs_gpio = SPI_CS_GPIOS_DT_SPEC_GET(DT_DRV_INST(n)),                                       \
         .irq_gpio = GPIO_DT_SPEC_GET_OR(DT_DRV_INST(n), irq_gpios, {}),                            \
@@ -412,10 +396,9 @@ static const struct sensor_driver_api pmw3360_driver_api = {
         .angle_tune = DT_PROP(DT_DRV_INST(n), angle_tune),                                         \
         .lift_height_3mm = DT_PROP(DT_DRV_INST(n), lift_height_3mm),                               \
         .polling_interval = DT_PROP(DT_DRV_INST(n), polling_interval),                             \
-        .automouse_layer = DT_PROP_OR(DT_DRV_INST(n), automouse_layer, 0),                         \
-        .automouse_timeout_ms = DT_PROP_OR(DT_DRV_INST(n), automouse_timeout_ms, 700),             \
     };                                                                                             \
     DEVICE_DT_INST_DEFINE(n, pmw3360_init, NULL, &data##n, &config##n, POST_KERNEL,                \
         CONFIG_INPUT_INIT_PRIORITY, &pmw3360_driver_api);
+_FOREACH_STATUS_OKAY(PMW3360_DEFINE)        CONFIG_INPUT_INIT_PRIORITY, &pmw3360_driver_api);
 
 DT_INST_FOREACH_STATUS_OKAY(PMW3360_DEFINE)
