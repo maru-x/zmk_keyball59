@@ -291,12 +291,12 @@ static void pmw3360_async_init(struct k_work *work) {
     int r2 = pmw3360_spi_read_reg(dev, PMW3360_REG_REVISION_ID, &revision_id);
     LOG_DBG("Read revision_id: 0x%02X, result: %d", revision_id, r2);
 
-    // ここでチェックを追加
-    if (product_id != 0x66 || revision_id != 0x01) {
-        LOG_ERR("PMW3360 not detected! product_id=0x%02X, revision_id=0x%02X", product_id, revision_id);
-        data->ready = false;
-        return;
-    }
+    // // ここでチェックを追加
+    // if (product_id != 0x66 || revision_id != 0x01) {
+    //     LOG_ERR("PMW3360 not detected! product_id=0x%02X, revision_id=0x%02X", product_id, revision_id);
+    //     data->ready = false;
+    //     return;
+    // }
 
     k_mutex_lock(&data->mutex, K_FOREVER);
 
