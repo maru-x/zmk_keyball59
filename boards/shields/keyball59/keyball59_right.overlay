@@ -105,7 +105,7 @@
 		reg = <0>;
 		spi-max-frequency = <500000>;
         	
-		cpi = <600>;
+		cpi = <1200>;
 		rotate-90;
 	};
 

@@ -204,7 +204,7 @@ static void pmw3360_read_motion_report(const struct device *dev) {
         input_report_rel(dev, INPUT_REL_X, dx, false, K_FOREVER);
 
         const int32_t dy = (motion_report.delta_y_h << 8) | motion_report.delta_y_l;
-        input_report_rel(dev, INPUT_REL_Y, dy, true, K_FOREVER);
+        input_report_rel(dev, INPUT_REL_Y, -dy, true, K_FOREVER); // Y軸の動きを反転
     }
 }
 
