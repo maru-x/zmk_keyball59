@@ -229,14 +229,33 @@ static void pmw3360_read_motion_report(const struct device *dev) {
 
         uint8_t curr_layer = zmk_keymap_highest_layer_active();
         if( curr_layer == SCROLL_LAYER) {
-            // If we are in the scroll layer, we need to report the scroll deltas
-            input_report_rel(dev, INPUT_REL_WHEEL, dx, true, K_FOREVER);
+            if( curr_layer == SNIPE_LAYER){
+                // if (dx < 0) {
+                //     dx = -(((-dx)+1) / 2);
+                // } else {
+                //     dx = (dx+1) / 2;
+                // }
+                if (dy < 0) {
+                    dy = -(((-dy)+1) / 2);
+                } else {
+                    dy = (dy+1) / 2;
+                }
+            }            // If we are in the scroll layer, we need to report the scroll deltas
+            input_report_rel(dev, INPUT_REL_WHEEL, -dy, true, K_FOREVER);
 //            input_report_rel(dev, INPUT_REL_HWHEEL, -dy, true, K_FOREVER);
         }
         else {
             if( curr_layer == SNIPE_LAYER){
-                dx = dx / 2; // halve the speed in snipe mode
-                dy = dy / 2; // halve the speed in snipe mode
+                if (dx < 0) {
+                    dx = -(((-dx)+1) / 2);
+                } else {
+                    dx = (dx+1) / 2;
+                }
+                if (dy < 0) {
+                    dy = -(((-dy)+1) / 2);
+                } else {
+                    dy = (dy+1) / 2;
+                }
             }
             // If we are in the automouse layer, we need to report the mouse movement
 //            input_report_mouse_movement(dev, dx, -dy);
