@@ -25,7 +25,7 @@ properties:
     description: "The sensor is installed rotated 270 degrees. Rotation properties are mutually exclusive."
   angle-tune:
     type: int
-    default: 0
+    default: -3
     description: "Adjust the sensor angle in degrees (Range: -30 - 30)."
   lift-height-3mm:
     type: boolean
