@@ -235,8 +235,8 @@ static void pmw3360_read_motion_report(const struct device *dev) {
         }
         else {
             if( curr_layer == SNIPE_LAYER){
-                dx /= 2; // halve the speed in snipe mode
-                dy /= 2; // halve the speed in snipe mode
+                dx = dx / 2; // halve the speed in snipe mode
+                dy = dy / 2; // halve the speed in snipe mode
             }
             // If we are in the automouse layer, we need to report the mouse movement
             input_report_mouse_movement(dev, dx, -dy);
