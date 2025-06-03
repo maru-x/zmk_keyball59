@@ -246,8 +246,8 @@ static void pmw3360_read_motion_report(const struct device *dev) {
         }
         else {
             if( curr_layer == SNIPE_LAYER){
-                dx = TOINT16(dx / 2);
-                dy = TOINT16(dy / 2);
+                dx = (dx >= 0) ?? (dx / 2) : ((dx - 1) / 2);
+                dy = (dy >= 0) ?? (dy / 2) : ((dy - 1) / 2);
                 // if (dx < 0) {
                 //     dx = -(((-dx)+1) / 2);
                 // } else {
