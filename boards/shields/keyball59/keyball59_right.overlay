@@ -105,7 +105,7 @@
 		reg = <0>;
 		spi-max-frequency = <2000000>;
         	
-		cpi = <1200>;
+		cpi = <2000>;
 		rotate-90;
         automouse-layer = <4>;
         scroll-layer = <5>;
