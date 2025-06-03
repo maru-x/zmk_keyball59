@@ -112,7 +112,7 @@
         scroll-layer = <5>;
         snipe-layer = <6>;
         mouse-y-inverted;
-
+        scroll-ticks = <50>;
         
         //angle-tune = <-15>;
 	};
