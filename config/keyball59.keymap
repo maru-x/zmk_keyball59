@@ -98,7 +98,7 @@
 &trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans     &trans       &trans
 &trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &mkp LCLK  &mlt 5 MCLK  &mkp RCLK
 &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &mkp MB4   &mo 6        &mkp MB5
-&trans  &trans  &trans  &trans  &trans  &mo 6   &to 0   &trans  &trans                             &to 0        &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans                             &trans       &to 0
             >;
         };
 
