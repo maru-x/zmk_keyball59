@@ -18,6 +18,8 @@ LOG_MODULE_REGISTER(pmw3360, CONFIG_INPUT_LOG_LEVEL);
 
 
 #define AUTOMOUSE_LAYER (DT_PROP(DT_DRV_INST(0), automouse_layer))
+#define SCROLL_LAYER (DT_PROP(DT_DRV_INST(0), scroll_layer))
+#define SNIPE_LAYER (DT_PROP(DT_DRV_INST(0), snipe_layer))
 //#if AUTOMOUSE_LAYER > 0
 struct k_timer automouse_layer_timer;
 static bool automouse_triggered = false;
@@ -222,15 +224,30 @@ static void pmw3360_read_motion_report(const struct device *dev) {
 
     if (motion_report.motion & PMW3360_MOTION_MOT) {
         const int32_t dx = (motion_report.delta_x_h << 8) | motion_report.delta_x_l;
-        input_report_rel(dev, INPUT_REL_X, dx, false, K_FOREVER);
-
         const int32_t dy = (motion_report.delta_y_h << 8) | motion_report.delta_y_l;
-        input_report_rel(dev, INPUT_REL_Y, -dy, true, K_FOREVER);
 
-        if (automouse_triggered || zmk_keymap_highest_layer_active() != AUTOMOUSE_LAYER) {
-//        if (input_mode == MOVE &&(automouse_triggered || zmk_keymap_highest_layer_active() != AUTOMOUSE_LAYER)) {
-            activate_automouse_layer();
+
+        uint8_t curr_layer = zmk_keymap_highest_layer_active();
+        if( curr_layer == SCROLL_LAYER) {
+            // If we are in the scroll layer, we need to report the scroll deltas
+            input_report_rel(dev, INPUT_REL_WHEEL, dx, false, K_FOREVER);
+            input_report_rel(dev, INPUT_REL_HWHEEL, -dy, true, K_FOREVER);
         }
+        else {
+            if( curr_layer == SNIPE_LAYER){
+                dx /= 2; // halve the speed in snipe mode
+                dy /= 2; // halve the speed in snipe mode
+            }
+            // If we are in the automouse layer, we need to report the mouse movement
+            input_report_mouse_movement(dev, dx, -dy);
+//            input_report_rel(dev, INPUT_REL_X, dx, false, K_FOREVER);
+//            input_report_rel(dev, INPUT_REL_Y, -dy, true, K_FOREVER);
+
+            if (automouse_triggered || zmk_keymap_highest_layer_active() != AUTOMOUSE_LAYER) {
+                activate_automouse_layer();
+            }
+        }
+
     }
 }
 

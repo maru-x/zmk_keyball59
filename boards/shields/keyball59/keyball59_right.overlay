@@ -108,6 +108,8 @@
 		cpi = <1200>;
 		rotate-90;
         automouse-layer = <4>;
+        scroll-layer = <5>;
+        snipe-layer = <6>;
         
         //angle-tune = <-15>;
 	};

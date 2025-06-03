@@ -39,3 +39,13 @@ properties:
     default: -1
     required: false
     description: Layer number to activate on mouse movement
+  scroll-layer:
+    type: int
+    default: -1
+    required: false
+    description: Layer number to activate on scroll wheel movement
+  snipe-layer:
+    type: int
+    default: -1
+    required: false
+    description: Layer number to activate on snipe button press
