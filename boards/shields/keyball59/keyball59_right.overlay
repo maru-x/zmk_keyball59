@@ -108,7 +108,8 @@
 		cpi = <1200>;
 		rotate-90;
         automouse_layer = <4>;
-        angle-tune = <-15>;
+        
+        //angle-tune = <-15>;
 	};
 
 };
