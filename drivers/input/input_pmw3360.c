@@ -238,7 +238,7 @@ static void pmw3360_read_motion_report(const struct device *dev) {
             // If we are in the scroll layer, we need to accumulate the scroll deltas
             data->scroll_delta_y += dy;
             // We need to scale the scroll deltas to match the scroll wheel speed
-            if (data->scroll_delta_y > 100)||(data->scroll_delta_y < -100) {
+            if ((data->scroll_delta_y > 100) || (data->scroll_delta_y < -100)) {
                 dy = data->scroll_delta_y / 100;
                 data->scroll_delta_y -= dy * 100;
                 // If we are in the scroll layer, we need to report the scroll deltas
