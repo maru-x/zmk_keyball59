@@ -12,9 +12,29 @@
 #include <zephyr/logging/log.h>
 #include <zephyr/sys/util.h>
 #include "input_pmw3360.h"
-#include <zmk/layers.h>
+#include <zmk/keymap.h>
 
 LOG_MODULE_REGISTER(pmw3360, CONFIG_INPUT_LOG_LEVEL);
+
+
+#define AUTOMOUSE_LAYER (DT_PROP(DT_DRV_INST(0), automouse_layer))
+//#if AUTOMOUSE_LAYER > 0
+struct k_timer automouse_layer_timer;
+static bool automouse_triggered = false;
+
+static void activate_automouse_layer() {
+    automouse_triggered = true;
+    zmk_keymap_layer_activate(AUTOMOUSE_LAYER);
+    k_timer_start(&automouse_layer_timer, K_MSEC(INPUT_PIXART_PMW3360_AUTOMOUSE_TIMEOUT_MS), K_NO_WAIT);
+}
+
+static void deactivate_automouse_layer(struct k_timer *timer) {
+    automouse_triggered = false;
+    zmk_keymap_layer_deactivate(AUTOMOUSE_LAYER);
+}
+
+K_TIMER_DEFINE(automouse_layer_timer, deactivate_automouse_layer, NULL);
+//#endif
 
 #if defined(CONFIG_INPUT_PIXART_PMW3360_USE_OWN_THREAD)
     K_THREAD_STACK_DEFINE(pmw3360_stack, CONFIG_INPUT_PIXART_PMW3360_THREAD_STACK_SIZE);
@@ -206,6 +226,11 @@ static void pmw3360_read_motion_report(const struct device *dev) {
 
         const int32_t dy = (motion_report.delta_y_h << 8) | motion_report.delta_y_l;
         input_report_rel(dev, INPUT_REL_Y, -dy, true, K_FOREVER);
+
+        if (automouse_triggered || zmk_keymap_highest_layer_active() != AUTOMOUSE_LAYER) {
+//        if (input_mode == MOVE &&(automouse_triggered || zmk_keymap_highest_layer_active() != AUTOMOUSE_LAYER)) {
+            activate_automouse_layer();
+        }
     }
 }
 

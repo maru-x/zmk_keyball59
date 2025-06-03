@@ -26,3 +26,7 @@ config INPUT_PIXART_PMW3360_THREAD_STACK_SIZE
     int "The stack size of the PWM3360 driver thread."
     depends on INPUT_PIXART_PMW3360_USE_OWN_THREAD
     default 768
+
+config INPUT_PIXART_PMW3360_AUTOMOUSE_TIMEOUT_MS
+  int "Amount of milliseconds the mouse layer will be active after using the trackball"
+  default 400
