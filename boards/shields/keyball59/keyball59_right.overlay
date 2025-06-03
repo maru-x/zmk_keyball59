@@ -107,7 +107,7 @@
         	
 		cpi = <1200>;
 		rotate-90;
-        automouse_layer = <3>;
+        automouse_layer = <4>;
 	};
 
 };
