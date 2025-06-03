@@ -223,8 +223,8 @@ static void pmw3360_read_motion_report(const struct device *dev) {
     pmw3360_spi_read_motion_burst(dev, (uint8_t *) &motion_report, sizeof(motion_report));
 
     if (motion_report.motion & PMW3360_MOTION_MOT) {
-        int32_t dx = (motion_report.delta_x_h << 8) | motion_report.delta_x_l;
-        int32_t dy = (motion_report.delta_y_h << 8) | motion_report.delta_y_l;
+        int16_t dx = (motion_report.delta_x_h << 8) | motion_report.delta_x_l;
+        int16_t dy = (motion_report.delta_y_h << 8) | motion_report.delta_y_l;
 
 
         uint8_t curr_layer = zmk_keymap_highest_layer_active();
@@ -236,9 +236,9 @@ static void pmw3360_read_motion_report(const struct device *dev) {
                 //     dx = (dx+1) / 2;
                 // }
                 if (dy < 0) {
-                    dy = -(((-dy)+1) / 2);
+                    dy = -(((-dy)+1) / 20);
                 } else {
-                    dy = (dy+1) / 2;
+                    dy = (dy+1) / 20;
                 }
             }            // If we are in the scroll layer, we need to report the scroll deltas
             input_report_rel(dev, INPUT_REL_WHEEL, -dy, true, K_FOREVER);
@@ -246,16 +246,18 @@ static void pmw3360_read_motion_report(const struct device *dev) {
         }
         else {
             if( curr_layer == SNIPE_LAYER){
-                if (dx < 0) {
-                    dx = -(((-dx)+1) / 2);
-                } else {
-                    dx = (dx+1) / 2;
-                }
-                if (dy < 0) {
-                    dy = -(((-dy)+1) / 2);
-                } else {
-                    dy = (dy+1) / 2;
-                }
+                dx = TOINT16(dx / 2);
+                dy = TOINT16(dy / 2);
+                // if (dx < 0) {
+                //     dx = -(((-dx)+1) / 2);
+                // } else {
+                //     dx = (dx+1) / 2;
+                // }
+                // if (dy < 0) {
+                //     dy = -(((-dy)+1) / 2);
+                // } else {
+                //     dy = (dy+1) / 2;
+                // }
             }
             // If we are in the automouse layer, we need to report the mouse movement
 //            input_report_mouse_movement(dev, dx, -dy);
