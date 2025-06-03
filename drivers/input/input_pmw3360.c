@@ -223,8 +223,8 @@ static void pmw3360_read_motion_report(const struct device *dev) {
     pmw3360_spi_read_motion_burst(dev, (uint8_t *) &motion_report, sizeof(motion_report));
 
     if (motion_report.motion & PMW3360_MOTION_MOT) {
-        const int32_t dx = (motion_report.delta_x_h << 8) | motion_report.delta_x_l;
-        const int32_t dy = (motion_report.delta_y_h << 8) | motion_report.delta_y_l;
+        int32_t dx = (motion_report.delta_x_h << 8) | motion_report.delta_x_l;
+        int32_t dy = (motion_report.delta_y_h << 8) | motion_report.delta_y_l;
 
 
         uint8_t curr_layer = zmk_keymap_highest_layer_active();
