@@ -105,6 +105,7 @@ struct pmw3360_config {
     bool mouse_wheel_x_inverted;
     bool mouse_wheel_y_inverted;
     uint16_t scroll_ticks;
+};
 
 #ifdef __cplusplus
 }
