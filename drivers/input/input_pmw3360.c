@@ -230,8 +230,8 @@ static void pmw3360_read_motion_report(const struct device *dev) {
         uint8_t curr_layer = zmk_keymap_highest_layer_active();
         if( curr_layer == SCROLL_LAYER) {
             // If we are in the scroll layer, we need to report the scroll deltas
-            input_report_rel(dev, INPUT_REL_WHEEL, dx, false, K_FOREVER);
-            input_report_rel(dev, INPUT_REL_HWHEEL, -dy, true, K_FOREVER);
+            input_report_rel(dev, INPUT_REL_WHEEL, dx, true, K_FOREVER);
+//            input_report_rel(dev, INPUT_REL_HWHEEL, -dy, true, K_FOREVER);
         }
         else {
             if( curr_layer == SNIPE_LAYER){
