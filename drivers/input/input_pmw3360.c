@@ -20,6 +20,11 @@ LOG_MODULE_REGISTER(pmw3360, CONFIG_INPUT_LOG_LEVEL);
 #define AUTOMOUSE_LAYER (DT_PROP(DT_DRV_INST(0), automouse_layer))
 #define SCROLL_LAYER (DT_PROP(DT_DRV_INST(0), scroll_layer))
 #define SNIPE_LAYER (DT_PROP(DT_DRV_INST(0), snipe_layer))
+#define MOUSE_X_INVERTED (DT_PROP(DT_DRV_INST(0), mouse_x_inverted))
+#define MOUSE_Y_INVERTED (DT_PROP(DT_DRV_INST(0), mouse_y_inverted))
+#define MOUSE_WHEEL_X_INVERTED (DT_PROP(DT_DRV_INST(0), mouse_wheel_x_inverted))
+#define MOUSE_WHEEL_Y_INVERTED (DT_PROP(DT_DRV_INST(0), mouse_wheel_y_inverted))
+
 //#if AUTOMOUSE_LAYER > 0
 struct k_timer automouse_layer_timer;
 static bool automouse_triggered = false;
@@ -222,24 +227,23 @@ static void pmw3360_read_motion_report(const struct device *dev) {
     struct pmw3360_data *data = dev->data;
     struct motion_burst motion_report = {};
     const struct pmw3360_config *config = dev->config;
-    const uint16_t cpi = data->cpi ? data->cpi : config->cpi;
 
     pmw3360_spi_read_motion_burst(dev, (uint8_t *) &motion_report, sizeof(motion_report));
 
     uint8_t curr_layer = zmk_keymap_highest_layer_active();
     if(( curr_layer == SNIPE_LAYER)&&(data->last_layer != SNIPE_LAYER)) {
         // Reset the snipe deltas when we enter the snipe layerk
-        pmw3360_spi_write_reg(dev, PMW3360_REG_CONFIG_1, (cpi / 400) - 1);
+        pmw3360_spi_write_reg(dev, PMW3360_REG_CONFIG_1, (config->snipe_cpi - 1));
         data->last_layer = curr_layer;
     }
     else if(( curr_layer == AUTOMOUSE_LAYER)&&(data->last_layer != AUTOMOUSE_LAYER)) {
         // Reset the automouse deltas when we enter the automouse layer
-        pmw3360_spi_write_reg(dev, PMW3360_REG_CONFIG_1, (cpi / 100) - 1);
+        pmw3360_spi_write_reg(dev, PMW3360_REG_CONFIG_1, (config->cpi / 100) - 1);
         data->last_layer = curr_layer;
     }
     else if(( curr_layer == SCROLL_LAYER) && (data->last_layer != SCROLL_LAYER)) {
         // Reset the scroll deltas when we leave the scroll layer
-        pmw3360_spi_write_reg(dev, PMW3360_REG_CONFIG_1, (cpi / 100) - 1);
+        pmw3360_spi_write_reg(dev, PMW3360_REG_CONFIG_1, (config->cpi / 100) - 1);
         data->scroll_delta_y = 0;
         data->last_layer = curr_layer;
     }
@@ -252,17 +256,26 @@ static void pmw3360_read_motion_report(const struct device *dev) {
             // If we are in the scroll layer, we need to accumulate the scroll deltas
             data->scroll_delta_y += dy;
             // We need to scale the scroll deltas to match the scroll wheel speed
-            if ((data->scroll_delta_y > 100) || (data->scroll_delta_y < -100)) {
-                dy = data->scroll_delta_y / 100;
-                data->scroll_delta_y -= dy * 100;
+            if ((data->scroll_delta_y > config->scroll_ticks) || (data->scroll_delta_y < -config->scroll_ticks)) {
+                dy = data->scroll_delta_y / config->scroll_ticks;
+                data->scroll_delta_y -= dy * config->scroll_ticks;
                 // If we are in the scroll layer, we need to report the scroll deltas
+#if MOUSE_WHEEL_Y_INVERTED
+                dy = -dy;
+#endif
                 input_report_rel(dev, INPUT_REL_WHEEL, dy, true, K_FOREVER);
             }
         }
         else {
             // If we are in the automouse layer, we need to report the mouse movement
+#if MOUSE_X_INVERTED
+            dx = -dx;
+#endif
+#if MOUSE_Y_INVERTED
+            dy = -dy;
+#endif
             input_report_rel(dev, INPUT_REL_X, dx, false, K_FOREVER);
-            input_report_rel(dev, INPUT_REL_Y, -dy, true, K_FOREVER);
+            input_report_rel(dev, INPUT_REL_Y, dy, true, K_FOREVER);
 
             if (automouse_triggered || zmk_keymap_highest_layer_active() != AUTOMOUSE_LAYER) {
                 activate_automouse_layer();
@@ -461,6 +474,8 @@ static const struct sensor_driver_api pmw3360_driver_api = {
         .angle_tune = DT_PROP(DT_DRV_INST(n), angle_tune),                                         \
         .lift_height_3mm = DT_PROP(DT_DRV_INST(n), lift_height_3mm),                               \
         .polling_interval = DT_PROP(DT_DRV_INST(n), polling_interval),                             \
+        .snipe_cpi = DT_PROP(DT_DRV_INST(n), snipe_cpi),                                           \
+        .scroll_ticks = DT_PROP(DT_DRV_INST(n), scroll_ticks),                                     \
     };                                                                                             \
     DEVICE_DT_INST_DEFINE(n, pmw3360_init, NULL, &data##n, &config##n, POST_KERNEL,                \
         CONFIG_INPUT_INIT_PRIORITY, &pmw3360_driver_api);

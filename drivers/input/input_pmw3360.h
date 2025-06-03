@@ -99,7 +99,12 @@ struct pmw3360_config {
     int8_t angle_tune;
     bool lift_height_3mm;
     uint32_t polling_interval;
-};
+    uint16_t snipe_cpi;
+    bool mouse_x_inverted;
+    bool mouse_y_inverted;
+    bool mouse_wheel_x_inverted;
+    bool mouse_wheel_y_inverted;
+    uint16_t scroll_ticks;
 
 #ifdef __cplusplus
 }
