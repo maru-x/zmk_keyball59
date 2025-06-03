@@ -40,19 +40,15 @@ properties:
     description: "The time, in microseconds, to wait between sensor polls when operating without an irq configured."
   mouse-x-inverted:
     type: boolean
-    default: false
     description: "Invert the X-axis movement."
   mouse-y-inverted:
     type: boolean
-    default: false
     description: "Invert the Y-axis movement."
   mouse-wheel-x-inverted:
     type: boolean
-    default: false
     description: "Invert the X-axis movement of the mouse wheel."
   mouse-wheel-y-inverted:
     type: boolean
-    default: false
     description: "Invert the Y-axis movement of the mouse wheel."
   automouse-layer:
     type: int
