@@ -230,7 +230,7 @@ static void pmw3360_read_motion_report(const struct device *dev) {
     uint8_t curr_layer = zmk_keymap_highest_layer_active();
     if(( curr_layer == SNIPE_LAYER)&&(data->last_layer != SNIPE_LAYER)) {
         // Reset the snipe deltas when we enter the snipe layerk
-        pmw3360_spi_write_reg(dev, PMW3360_REG_CONFIG_1, (config->snipe_cpi / 100) - 1));
+        pmw3360_spi_write_reg(dev, PMW3360_REG_CONFIG_1, (config->snipe_cpi / 100) - 1);
         data->last_layer = curr_layer;
     }
     else if(( curr_layer == AUTOMOUSE_LAYER)&&(data->last_layer != AUTOMOUSE_LAYER)) {
