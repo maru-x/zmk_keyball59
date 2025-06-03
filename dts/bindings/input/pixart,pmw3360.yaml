@@ -37,3 +37,5 @@ properties:
   automouse-layer:
     type: int
     default: -1
+    required: false
+    description: Layer number to activate on mouse movement
