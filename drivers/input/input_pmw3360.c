@@ -239,9 +239,9 @@ static void pmw3360_read_motion_report(const struct device *dev) {
                 dy = dy / 2; // halve the speed in snipe mode
             }
             // If we are in the automouse layer, we need to report the mouse movement
-            input_report_mouse_movement(dev, dx, -dy);
-//            input_report_rel(dev, INPUT_REL_X, dx, false, K_FOREVER);
-//            input_report_rel(dev, INPUT_REL_Y, -dy, true, K_FOREVER);
+//            input_report_mouse_movement(dev, dx, -dy);
+            input_report_rel(dev, INPUT_REL_X, dx, false, K_FOREVER);
+            input_report_rel(dev, INPUT_REL_Y, -dy, true, K_FOREVER);
 
             if (automouse_triggered || zmk_keymap_highest_layer_active() != AUTOMOUSE_LAYER) {
                 activate_automouse_layer();
