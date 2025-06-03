@@ -25,7 +25,7 @@ static bool automouse_triggered = false;
 static void activate_automouse_layer() {
     automouse_triggered = true;
     zmk_keymap_layer_activate(AUTOMOUSE_LAYER);
-    k_timer_start(&automouse_layer_timer, K_MSEC(INPUT_PIXART_PMW3360_AUTOMOUSE_TIMEOUT_MS), K_NO_WAIT);
+    k_timer_start(&automouse_layer_timer, K_MSEC(CONFIG_INPUT_PIXART_PMW3360_AUTOMOUSE_TIMEOUT_MS), K_NO_WAIT);
 }
 
 static void deactivate_automouse_layer(struct k_timer *timer) {
