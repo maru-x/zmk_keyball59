@@ -83,6 +83,8 @@ struct pmw3360_data {
     struct k_work motion_work;
     struct k_work_delayable init_work;
     struct gpio_callback irq_gpio_cb; // motion pin irq callback
+    int32_t scroll_delta_y;
+    int16_t last_layer;
 };
 
 // The drivers configuration struture - populated by the device tree
