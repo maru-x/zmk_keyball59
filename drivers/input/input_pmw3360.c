@@ -20,10 +20,7 @@ LOG_MODULE_REGISTER(pmw3360, CONFIG_INPUT_LOG_LEVEL);
 #define AUTOMOUSE_LAYER (DT_PROP(DT_DRV_INST(0), automouse_layer))
 #define SCROLL_LAYER (DT_PROP(DT_DRV_INST(0), scroll_layer))
 #define SNIPE_LAYER (DT_PROP(DT_DRV_INST(0), snipe_layer))
-#define MOUSE_X_INVERTED (DT_PROP(DT_DRV_INST(0), mouse_x_inverted))
-#define MOUSE_Y_INVERTED (DT_PROP(DT_DRV_INST(0), mouse_y_inverted))
-#define MOUSE_WHEEL_X_INVERTED (DT_PROP(DT_DRV_INST(0), mouse_wheel_x_inverted))
-#define MOUSE_WHEEL_Y_INVERTED (DT_PROP(DT_DRV_INST(0), mouse_wheel_y_inverted))
+
 
 //#if AUTOMOUSE_LAYER > 0
 struct k_timer automouse_layer_timer;
@@ -260,20 +257,21 @@ static void pmw3360_read_motion_report(const struct device *dev) {
                 dy = data->scroll_delta_y / config->scroll_ticks;
                 data->scroll_delta_y -= dy * config->scroll_ticks;
                 // If we are in the scroll layer, we need to report the scroll deltas
-#if MOUSE_WHEEL_Y_INVERTED
-                dy = -dy;
-#endif
+                if (config->mouse_wheel_y_inverted) {
+                    dy = -dy;
+                }
                 input_report_rel(dev, INPUT_REL_WHEEL, dy, true, K_FOREVER);
             }
         }
         else {
             // If we are in the automouse layer, we need to report the mouse movement
-#if MOUSE_X_INVERTED
-            dx = -dx;
-#endif
-#if MOUSE_Y_INVERTED
-            dy = -dy;
-#endif
+
+            if (config->mouse_x_inverted) {
+                dx = -dx;
+            }
+            if (config->mouse_y_inverted) {
+                dy = -dy;
+            }
             input_report_rel(dev, INPUT_REL_X, dx, false, K_FOREVER);
             input_report_rel(dev, INPUT_REL_Y, dy, true, K_FOREVER);
 
@@ -476,6 +474,10 @@ static const struct sensor_driver_api pmw3360_driver_api = {
         .polling_interval = DT_PROP(DT_DRV_INST(n), polling_interval),                             \
         .snipe_cpi = DT_PROP(DT_DRV_INST(n), snipe_cpi),                                           \
         .scroll_ticks = DT_PROP(DT_DRV_INST(n), scroll_ticks),                                     \
+        .mouse_x_inverted = DT_PROP(DT_DRV_INST(n), mouse_x_inverted),                             \
+        .mouse_y_inverted = DT_PROP(DT_DRV_INST(n), mouse_y_inverted),                             \
+        .mouse_wheel_x_inverted = DT_PROP(DT_DRV_INST(n), mouse_wheel_x_inverted),                 \
+        .mouse_wheel_y_inverted = DT_PROP(DT_DRV_INST(n), mouse_wheel_y_inverted),                 \
     };                                                                                             \
     DEVICE_DT_INST_DEFINE(n, pmw3360_init, NULL, &data##n, &config##n, POST_KERNEL,                \
         CONFIG_INPUT_INIT_PRIORITY, &pmw3360_driver_api);
