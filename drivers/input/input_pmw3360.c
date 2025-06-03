@@ -221,20 +221,34 @@ static int pmw3360_init_irq(const struct device *dev) {
 static void pmw3360_read_motion_report(const struct device *dev) {
     struct pmw3360_data *data = dev->data;
     struct motion_burst motion_report = {};
+    const struct pmw3360_config *config = dev->config;
+    const uint16_t cpi = data->cpi ? data->cpi : config->cpi;
+
     pmw3360_spi_read_motion_burst(dev, (uint8_t *) &motion_report, sizeof(motion_report));
 
     uint8_t curr_layer = zmk_keymap_highest_layer_active();
+    if(( curr_layer == SNIPE_LAYER)&&(data->last_layer != SNIPE_LAYER)) {
+        // Reset the snipe deltas when we enter the snipe layerk
+        pmw3360_spi_write_reg(dev, PMW3360_REG_CONFIG_1, (cpi / 400) - 1);
+        data->last_layer = curr_layer;
+    }
+    else if(( curr_layer == AUTOMOUSE_LAYER)&&(data->last_layer != AUTOMOUSE_LAYER)) {
+        // Reset the automouse deltas when we enter the automouse layer
+        pmw3360_spi_write_reg(dev, PMW3360_REG_CONFIG_1, (cpi / 100) - 1);
+        data->last_layer = curr_layer;
+    }
+    else if(( curr_layer == SCROLL_LAYER) && (data->last_layer != SCROLL_LAYER)) {
+        // Reset the scroll deltas when we leave the scroll layer
+        pmw3360_spi_write_reg(dev, PMW3360_REG_CONFIG_1, (cpi / 100) - 1);
+        data->scroll_delta_y = 0;
+        data->last_layer = curr_layer;
+    }
 
     if (motion_report.motion & PMW3360_MOTION_MOT) {
         int16_t dx = (motion_report.delta_x_h << 8) | motion_report.delta_x_l;
         int16_t dy = (motion_report.delta_y_h << 8) | motion_report.delta_y_l;
 
         if( curr_layer == SCROLL_LAYER) {
-            if (data->last_layer != SCROLL_LAYER) {
-                // Reset the scroll delta when we enter the scroll layer
-                data->scroll_delta_y = 0;
-            }
-
             // If we are in the scroll layer, we need to accumulate the scroll deltas
             data->scroll_delta_y += dy;
             // We need to scale the scroll deltas to match the scroll wheel speed
@@ -246,12 +260,7 @@ static void pmw3360_read_motion_report(const struct device *dev) {
             }
         }
         else {
-            if( curr_layer == SNIPE_LAYER){
-                dx = (dx >= 0) ? (dx + 1 / 2) : ((dx - 1) / 2);
-                dy = (dy >= 0) ? (dy + 1 / 2) : ((dy - 1) / 2);
-            }
             // If we are in the automouse layer, we need to report the mouse movement
-
             input_report_rel(dev, INPUT_REL_X, dx, false, K_FOREVER);
             input_report_rel(dev, INPUT_REL_Y, -dy, true, K_FOREVER);
 
@@ -261,7 +270,7 @@ static void pmw3360_read_motion_report(const struct device *dev) {
         }
 
     }
-    data->last_layer = curr_layer;
+
 }
 
 static void pmw3360_work_callback(struct k_work *work) {
