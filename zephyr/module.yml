@@ -5,3 +5,4 @@ build:
   settings:
     dts_root: .
     board_root: .
+    dts_root: ../modules/zephyr/pmw3360/dts
