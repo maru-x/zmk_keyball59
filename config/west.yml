@@ -11,7 +11,7 @@ manifest:
       remote: zmkfirmware
       revision: main
       import: app/west.yml
-    - name: zmk-pat912x
+    - name: pat912x-driver
       remote: mygithub        # 自分の GitHub またはローカルパス
       revision: main
       path: modules/zephyr/pat912x
@@ -23,4 +23,3 @@ manifest:
       revision: main
   self:
     path: config
-
