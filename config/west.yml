@@ -2,9 +2,8 @@ manifest:
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
-#    - name: mygithub
-#      url-base: https://github.com/maru-x
-
+    - name: mygithub
+      url-base: https://github.com/maru-x
     - name: mctechnology17
       url-base: https://github.com/mctechnology17
   projects:
@@ -12,6 +11,10 @@ manifest:
       remote: zmkfirmware
       revision: main
       import: app/west.yml
+    - name: zmk-pat912x
+      remote: mygithub        # 自分の GitHub またはローカルパス
+      revision: main
+      path: modules/zephyr/pat912x
 #    - name: zmk-pmw3360-driver
 #      remote: mygithub
 #      revision: main
@@ -20,3 +23,4 @@ manifest:
       revision: main
   self:
     path: config
+

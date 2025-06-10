@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"name": "pat912x-driver",
+			"path": "../../pat912x-driver"
+		}
+	],
+	"settings": {}
+}
