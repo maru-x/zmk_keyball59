@@ -99,7 +99,7 @@
     pinctrl-1    = <&spi1_sleep>;
     pinctrl-names= "default", "sleep";
     cs-gpios = <&gpio0 6 GPIO_ACTIVE_LOW>;
-	mouse: mouse@0 {
+	pmw3360: pmw3360@0 {
 		compatible = "pixart,pmw3360";
 		status = "okay";
 		reg = <0>;
@@ -126,6 +126,6 @@
 / {
 	mouse_listener {
 		compatible = "zmk,input-listener";
-		device = <&mouse>;
+		device = <&pmw3360>;
 	};
 };
