@@ -3,8 +3,5 @@ build:
   cmake: .
   kconfig: Kconfig
   settings:
-    dts_root: 
-    - .
-    - modules/zephyr/pmw3360/dts
+    dts_root: .
     board_root: .
-
