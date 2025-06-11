@@ -15,10 +15,10 @@ manifest:
       remote: mygithub # 自分の GitHub またはローカルパス
       revision: main
       path: modules/zephyr/pat912x
-    - name: zmk-pmw3360-driver
-      remote: mygithub
-      revision: main
-      path: modules/zephyr/pmw3360
+    #    - name: zmk-pmw3360-driver
+    #      remote: mygithub
+    #      revision: main
+    #      path: modules/zephyr/pmw3360
     - name: zmk-nice-oled
       remote: mctechnology17
       revision: main
