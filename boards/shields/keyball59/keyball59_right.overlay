@@ -98,7 +98,7 @@
     pat912x: pat9126@75 {
         compatible = "pixart,pat912x";
         reg = <0x75>;                       /* ID_SEL=GND → 0x75 */
-        motion-gpios = <&gpio1 13 GPIO_ACTIVE_LOW | GPIO_PULL_UP>;
+        motion-gpios = <&gpio1 13 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
         zephyr,axis-x = <0>;
         zephyr,axis-y = <1>;
         res-x-cpi = <1200>;                  /* 好みに応じて 200-1275 */
