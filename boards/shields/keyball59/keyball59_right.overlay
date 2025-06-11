@@ -69,7 +69,7 @@
     };
 };
 
-&i2c0 {
+&i2c1 {
     /* 既存ノードの上書き。I²C0 = TWIM0 */
     status = "okay";
     compatible = "nordic,nrf-twi";   /* 明示しておくと安心 */
