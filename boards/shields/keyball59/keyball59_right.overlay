@@ -69,12 +69,30 @@
     };
 };
 
+&pinctrl {
+    i2c1_default: i2c1_default {
+        group1 {
+            psels = <NRF_PSEL(TWIM_SDA, 0, 10)>,
+                    <NRF_PSEL(TWIM_SCL, 0, 6)>;
+        };
+    };
+
+    i2c1_sleep: i2c1_sleep {
+        group1 {
+            psels = <NRF_PSEL(TWIM_SDA, 0, 10)>,
+                    <NRF_PSEL(TWIM_SCL, 0, 6)>;
+            low-power-enable;
+        };
+    };
+};
+
 &i2c1 {
     /* 既存ノードの上書き。I²C0 = TWIM0 */
     status = "okay";
     compatible = "nordic,nrf-twi";   /* 明示しておくと安心 */
-    sda-pin = <10>;                  /* P0.10  */
-    scl-pin = <6>;                   /* P0.06  */
+    pinctrl-0 = <&i2c1_default>;
+    pinctrl-1 = <&i2c1_sleep>;
+    pinctrl-names = "default", "sleep";
     clock-frequency = <I2C_BITRATE_STANDARD>; /* 100 kHz */
 
     pat912x: pat9126@75 {
