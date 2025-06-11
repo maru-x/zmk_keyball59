@@ -101,10 +101,10 @@
         motion-gpios = <&gpio1 13 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
         zephyr,axis-x = <0>;
         zephyr,axis-y = <1>;
-        res-x-cpi = <1200>;                  /* 好みに応じて 200-1275 */
-        res-y-cpi = <1200>;
+        res-x-cpi = <800>;                  /* 好みに応じて 200-1275 */
+        res-y-cpi = <800>;
         sleep1-enable;                      /* 低消費電力モード */
-        sleep2-enable;
+//        sleep2-enable;
         invert-x;                          /* X軸の反転 */
         invert-y;                          /* Y軸の反転 */
         /* invert-x; invert-y; も必要なら追加 */
