@@ -69,10 +69,32 @@
     };
 };
 
+&i2c0 {
+    /* 既存ノードの上書き。I²C0 = TWIM0 */
+    status = "okay";
+    compatible = "nordic,nrf-twi";   /* 明示しておくと安心 */
+    sda-pin = <10>;                  /* P0.10  */
+    scl-pin = <6>;                   /* P0.06  */
+    clock-frequency = <I2C_BITRATE_STANDARD>; /* 100 kHz */
+
+    pat9126: pat9126@75 {
+        compatible = "pixart,pat912x";
+        reg = <0x75>;                       /* ID_SEL=GND → 0x75 */
+        motion-gpios = <&gpio1 13 GPIO_ACTIVE_LOW>;
+        zephyr,axis-x = <INPUT_REL_X>;
+        zephyr,axis-y = <INPUT_REL_Y>;
+        res-x-cpi = <800>;                  /* 好みに応じて 200-1275 */
+        res-y-cpi = <800>;
+        sleep1-enable;                      /* 低消費電力モード */
+        sleep2-enable;
+        /* invert-x; invert-y; も必要なら追加 */
+    };
+};
+
+/*
 &pinctrl {
     spi1_default: spi1_default {
         group1 {
-            /* SCLK = P1.13, MOSI = P0.10, MISO = P1.11 */
             psels = 
                 <NRF_PSEL(SPIM_SCK,  1, 13)>,
                 <NRF_PSEL(SPIM_MOSI, 0, 10)>,
@@ -82,7 +104,6 @@
 
     spi1_sleep: spi1_sleep {
         group1 {
-            /* スリープ時も同じピン配置 */
             psels = 
                 <NRF_PSEL(SPIM_SCK,  1, 13)>,
                 <NRF_PSEL(SPIM_MOSI, 0, 10)>,
@@ -91,7 +112,9 @@
         };
     };
 };
+*/
 
+/*
 &spi1 {
 	status = "okay";
     compatible   = "nordic,nrf-spim";
@@ -116,16 +139,25 @@
         
         //angle-tune = <-15>;
 	};
-
 };
+*/
 
 &right_encoder {
     status = "okay";
 };
 
+/*
 / {
 	mouse_listener {
 		compatible = "zmk,input-listener";
 		device = <&pmw3360>;
 	};
+};
+*/
+
+/ {
+    mouse_listener_pat912x {
+        compatible = "zmk,input-listener";
+        device = <&pat912x>;
+    };
 };
