@@ -81,8 +81,8 @@
         compatible = "pixart,pat912x";
         reg = <0x75>;                       /* ID_SEL=GND → 0x75 */
         motion-gpios = <&gpio1 13 GPIO_ACTIVE_LOW>;
-        zephyr,axis-x = <0>;
-        zephyr,axis-y = <1>;
+        zephyr,axis-x = <REL_X>;
+        zephyr,axis-y = <REL_Y>;
         res-x-cpi = <800>;                  /* 好みに応じて 200-1275 */
         res-y-cpi = <800>;
         sleep1-enable;                      /* 低消費電力モード */
