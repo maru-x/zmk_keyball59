@@ -107,6 +107,10 @@
 //        sleep2-enable;
         invert-x;                          /* X軸の反転 */
         invert-y;                          /* Y軸の反転 */
+        automouse-layer = <4>;
+        scroll-layer = <5>;
+        snipe-layer = <6>;
+        
         /* invert-x; invert-y; も必要なら追加 */
     };
 };
