@@ -65,7 +65,7 @@
                 <&macro_pause_for_release>,
                 <&macro_release>,
                 <&mkp RCLK>,
-                <&macro_wait_time 500>,
+                <&macro_wait_time 1000>,
                 <&macro_tap>,
                 <&to 0>;
 
@@ -103,7 +103,7 @@
             #binding-cells = <0>;
             bindings =
                 <&macro_tap>,
-                <&kp LC(C)>,
+                <&kp LC(V)>,
                 <&macro_pause_for_release>,
                 <&macro_tap>,
                 <&to 0>;
