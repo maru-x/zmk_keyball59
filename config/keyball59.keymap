@@ -71,6 +71,45 @@
 
             label = "R_CLICK_AND_BACK";
         };
+
+        cut_and_back: cut_and_back {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings =
+                <&macro_tap>,
+                <&kp LC(X)>,
+                <&macro_pause_for_release>,
+                <&macro_tap>,
+                <&to 0>;
+
+            label = "CUT_AND_BACK";
+        };
+
+        copy_and_back: copy_and_back {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings =
+                <&macro_tap>,
+                <&kp LC(C)>,
+                <&macro_pause_for_release>,
+                <&macro_tap>,
+                <&to 0>;
+
+            label = "COPY_AND_BACK";
+        };
+
+        paste_and_back: paste_and_back {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings =
+                <&macro_tap>,
+                <&kp LC(C)>,
+                <&macro_pause_for_release>,
+                <&macro_tap>,
+                <&to 0>;
+
+            label = "PASTE_AND_BACK";
+        };
     };
 
     keymap {
@@ -128,11 +167,11 @@
         mouse_layer {
             label = "MOUSE";
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans             &trans       &trans
-&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans             &trans       &trans
-&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &L_click_and_back  &mlt 5 MCLK  &R_click_and_back
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &mkp MB4           &tog 6       &mkp MB5
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans                                     &trans       &to 0
+&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans             &trans          &trans
+&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &cut_and_back      &copy_and_back  &paste_and_back
+&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &L_click_and_back  &mlt 5 MCLK     &R_click_and_back
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &mkp MB4           &tog 6          &mkp MB5
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans                                     &trans          &to 0
             >;
         };
 
