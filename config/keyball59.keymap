@@ -40,16 +40,44 @@
     };
 
     macros {
-        trans_to_1: new_macro {
+        trans_to_0_1: new_macro {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings =
                 <&trans>,
                 <&macro_pause_for_release>,
                 <&macro_tap>,
-                <&to 1>;
+                <&to 0>;
 
             label = "NEW_MACRO";
+        };
+
+        trans_to_0_2: trans_to_1_2 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings =
+                <&macro_press>,
+                <&trans>,
+                <&macro_pause_for_release>,
+                <&macro_press>,
+                <&trans>,
+                <&macro_press>,
+                <&to 0>;
+
+            label = "TRANS_TO_1_2";
+        };
+
+        trans_to_0_3: trans_to_0_3 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings =
+                <&macro_tap>,
+                <&trans>,
+                <&macro_pause_for_release>,
+                <&macro_tap>,
+                <&to 0>;
+
+            label = "TRANS_TO_0_3";
         };
     };
 
@@ -108,11 +136,11 @@
         mouse_layer {
             label = "MOUSE";
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans                  &trans       &trans       &trans  &trans     &trans       &trans
-&trans  &trans  &trans  &trans  &trans  &trans                  &trans_to_1  &trans       &trans  &trans     &trans       &trans
-&trans  &trans  &trans  &trans  &trans  &trans                  &trans       &trans_to_1  &trans  &mkp LCLK  &mlt 5 MCLK  &mkp RCLK
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans       &trans       &trans  &mkp MB4   &tog 6       &mkp MB5
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans                                       &trans       &to 0
+&trans  &trans  &trans  &trans  &trans  &trans                  &trans         &trans         &trans         &trans     &trans       &trans
+&trans  &trans  &trans  &trans  &trans  &trans                  &trans         &trans         &trans         &trans     &trans       &trans
+&trans  &trans  &trans  &trans  &trans  &trans                  &trans_to_0_1  &trans_to_0_2  &trans_to_0_3  &mkp LCLK  &mlt 5 MCLK  &mkp RCLK
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans         &trans         &trans         &mkp MB4   &tog 6       &mkp MB5
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans                                                  &trans       &to 0
             >;
         };
 
