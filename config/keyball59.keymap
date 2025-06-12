@@ -55,6 +55,22 @@
 
             label = "L_CLICK_AND_BACK";
         };
+
+        R_click_and_back: R_click_and_back {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings =
+                <&macro_press>,
+                <&mkp RCLK>,
+                <&macro_pause_for_release>,
+                <&macro_release>,
+                <&mkp RCLK>,
+                <&macro_wait_time 500>,
+                <&macro_tap>,
+                <&to 0>;
+
+            label = "R_CLICK_AND_BACK";
+        };
     };
 
     keymap {
@@ -114,7 +130,7 @@
             bindings = <
 &trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans             &trans       &trans
 &trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans             &trans       &trans
-&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &L_click_and_back  &mlt 5 MCLK  &mkp RCLK
+&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &L_click_and_back  &mlt 5 MCLK  &R_click_and_back
 &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &mkp MB4           &tog 6       &mkp MB5
 &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans                                     &trans       &to 0
             >;
