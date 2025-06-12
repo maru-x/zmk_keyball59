@@ -110,7 +110,7 @@
         ny-min-value = <4>;              /* ノイズ除去最小値 */
 
         sleep1-enable;                      /* 低消費電力モード */
-//        sleep2-enable;
+        sleep2-enable;
         sleep1-set-value = <0x77>; /* 低消費電力モードの設定値 */
         sleep2-set-value = <0x10>; /* 低消費電力モードの設定値 */
 
