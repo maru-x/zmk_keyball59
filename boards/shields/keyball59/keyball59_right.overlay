@@ -103,7 +103,7 @@
         zephyr,axis-y = <1>;
         res-x-cpi = <1275>;                  /* 好みに応じて 200-1275 */
         res-y-cpi = <1275>;
-//        sleep1-enable;                      /* 低消費電力モード */
+        sleep1-enable;                      /* 低消費電力モード */
 //        sleep2-enable;
         invert-x;                          /* X軸の反転 */
         invert-y;                          /* Y軸の反転 */
