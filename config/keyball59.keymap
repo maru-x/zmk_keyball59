@@ -39,6 +39,20 @@
         };
     };
 
+    macros {
+        trans_to_1: new_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings =
+                <&trans>,
+                <&macro_pause_for_release>,
+                <&macro_tap>,
+                <&to 1>;
+
+            label = "NEW_MACRO";
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
@@ -94,11 +108,11 @@
         mouse_layer {
             label = "MOUSE";
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans     &trans       &trans
-&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans     &trans       &trans
-&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &mkp LCLK  &mlt 5 MCLK  &mkp RCLK
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &mkp MB4   &tog 6       &mkp MB5
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans                             &trans       &to 0
+&trans  &trans  &trans  &trans  &trans  &trans                  &trans       &trans       &trans  &trans     &trans       &trans
+&trans  &trans  &trans  &trans  &trans  &trans                  &trans_to_1  &trans       &trans  &trans     &trans       &trans
+&trans  &trans  &trans  &trans  &trans  &trans                  &trans       &trans_to_1  &trans  &mkp LCLK  &mlt 5 MCLK  &mkp RCLK
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans       &trans       &trans  &mkp MB4   &tog 6       &mkp MB5
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans                                       &trans       &to 0
             >;
         };
 
