@@ -104,7 +104,7 @@
         res-x-cpi = <600>;                  /* 好みに応じて 200-1275 */
         res-y-cpi = <600>;
         snipe-ticks = <10>;              /* スナイプ時のスクロール量 */
-        scroll-ticks = <30>;               /* スクロール時のスクロール量 */
+        scroll-ticks = <20>;               /* スクロール時のスクロール量 */
         automouse_timeout_ms = <5000>;         /* 自動マウスのタイムアウト時間 */
         motion-timer-ms = <10>;            /* モーション検出のタイマー間隔 */
         ny-min-value = <1>;              /* ノイズ除去最小値 */
