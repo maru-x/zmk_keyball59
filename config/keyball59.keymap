@@ -50,6 +50,7 @@
                 <&macro_release>,
                 <&mkp LCLK>,
                 <&macro_wait_time 500>,
+                <&macro_tap>,
                 <&to 0>;
 
             label = "L_CLICK_AND_BACK";
