@@ -101,13 +101,19 @@
         motion-gpios = <&gpio1 13 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
         zephyr,axis-x = <0>;
         zephyr,axis-y = <1>;
-        res-x-cpi = <800>;                  /* 好みに応じて 200-1275 */
-        res-y-cpi = <800>;
+        res-x-cpi = <600>;                  /* 好みに応じて 200-1275 */
+        res-y-cpi = <600>;
         snipe-ticks = <10>;              /* スナイプ時のスクロール量 */
         scroll-ticks = <30>;               /* スクロール時のスクロール量 */
         automouse_timeout_ms = <5000>;         /* 自動マウスのタイムアウト時間 */
+        motion-timer-ms = <10>;            /* モーション検出のタイマー間隔 */
+        ny-min-value = <1>;              /* ノイズ除去最小値 */
+
         sleep1-enable;                      /* 低消費電力モード */
 //        sleep2-enable;
+        sleep1-set-value = <0x77>; /* 低消費電力モードの設定値 */
+        sleep2-set-value = <0x10>; /* 低消費電力モードの設定値 */
+
         invert-x;                          /* X軸の反転 */
         invert-y;                          /* Y軸の反転 */
         automouse-layer = <4>;
