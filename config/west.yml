@@ -22,9 +22,9 @@ manifest:
     - name: zmk-nice-oled
       remote: mctechnology17
       revision: main
-    - name: mouse-click-back
+    - name: zmk-mouse-click-back
+      remote: mygithub # 自分の GitHub またはローカルパス
       path: modules/click_back
-      revision: ""
-      type: local
+      revision: main
   self:
     path: config
