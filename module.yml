@@ -1,12 +1,15 @@
-name: click_back # 任意。1 リポ 1 モジュール
+name: click_back
 build:
   cmake: |
     target_sources(app PRIVATE
       ${CMAKE_CURRENT_SOURCE_DIR}/app/src/behaviors/behavior_mouse_click_back.c
     )
-kconfig:
-  load: app
-  fragment: |
-    config ZMK_BEHAVIOR_MOUSE_CLICK_BACK
-        bool "Mouse Click with Auto-Return"
-        default y
+  kconfig:
+    load: app
+    fragment: |
+      config ZMK_BEHAVIOR_MOUSE_CLICK_BACK
+          bool "Mouse Click with Auto-Return"
+          default y
+settings:
+  # ここを app から app/dts に変更
+  dts_root: app/dts

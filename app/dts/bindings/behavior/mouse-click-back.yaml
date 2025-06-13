@@ -1,0 +1,9 @@
+description: "Mouse Click Back behavior binding"
+compatible: "behavior,mouse-click-back"
+properties:
+  timeout-ms:
+    type: integer
+    description: "レイヤー復帰までのタイムアウト (ms)"
+  return-layer:
+    type: integer
+    description: "復帰先のレイヤー番号"
