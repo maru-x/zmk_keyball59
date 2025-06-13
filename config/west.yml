@@ -22,5 +22,9 @@ manifest:
     - name: zmk-nice-oled
       remote: mctechnology17
       revision: main
+    - name: mouse-click-back
+      path: modules/click_back
+      revision: ""
+      type: local
   self:
     path: config

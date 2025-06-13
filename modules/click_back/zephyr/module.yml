@@ -1,0 +1,6 @@
+name: mouse-click-back
+build:
+  cmake: .
+  kconfig: .
+  settings:
+    dts_root: .

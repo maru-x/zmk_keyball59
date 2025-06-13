@@ -1,0 +1,2 @@
+zephyr_library()
+zephyr_library_sources_ifdef(CONFIG_ZMK_BEHAVIOR_MOUSE_CLICK_BACK src/behaviors/behavior_mouse_click_back.c)
