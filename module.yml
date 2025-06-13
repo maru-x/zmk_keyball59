@@ -10,6 +10,7 @@ build:
       config ZMK_BEHAVIOR_MOUSE_CLICK_BACK
           bool "Mouse Click with Auto-Return"
           default y
+
 settings:
   # ここを app から app/dts に変更
   dts_root: app/dts
