@@ -37,9 +37,33 @@
             tapping-term-ms = <200>;
             flavor = "balanced";
         };
+
+        /* 左クリック＋0.5 s でレイヤー0へ戻る */
+        mcb: mouse_click_back {
+            compatible    = "behavior,mouse-click-back";
+            timeout-ms    = <500>;   /* 任意変更可 */
+            return-layer  = <0>;     /* 任意変更可 */
+            /* 引数 = HID マウスボタン番号（0:L, 1:R, 2:M …）。1 個だけ */
+            #binding-cells = <1>;
+            label = "MOUSE_CLICK_BACK";
+        };        
     };
 
     macros {
+        lclk_hold_and_back: lclk_hold_and_back {
+            compatible     = "zmk,behavior-macro";
+            label          = "LCLK_HOLD_AND_BACK";
+            #binding-cells = <0>;
+
+            /* ── バインディングを 1 行ずつ < … > で囲み、最後以外に , ── */
+            bindings =
+                < &macro_press   &mbp LCLK >,        /* 左ボタン DOWN            */
+                < &macro_pause_for_release >,        /* キーリリース待ち         */
+                < &macro_release &mbr LCLK >,        /* 左ボタン UP              */
+                < &macro_wait 500 >,                 /* 0.5 s 待機               */
+                < &to 0 >;                           /* ベースレイヤーへ戻る     */
+        };
+
         L_click_and_back: L_click_and_back {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -177,11 +201,11 @@
         mouse_layer {
             label = "MOUSE";
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans             &trans          &trans
-&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &cut_and_back      &copy_and_back  &paste_and_back
-&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &L_click_and_back  &mlt 5 MCLK     &R_click_and_back
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &mkp MB4           &tog 6          &mkp MB5
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans                                     &trans          &to 0
+&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans          &trans          &trans
+&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &cut_and_back   &copy_and_back  &paste_and_back
+&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &mcb 0          &mlt 5 MCLK     &mcb 1
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &mkp MB4        &tog 6          &mkp MB5
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans                                  &trans          &to 0
             >;
         };
 
