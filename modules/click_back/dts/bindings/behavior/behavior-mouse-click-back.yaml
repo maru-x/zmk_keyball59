@@ -1,5 +1,6 @@
 description: "Mouse Click Back behavior binding"
 compatible: "behavior,mouse-click-back"
+binding-cells: 1
 properties:
   timeout-ms:
     type: integer
@@ -7,3 +8,7 @@ properties:
   return-layer:
     type: integer
     description: "復帰先のレイヤー番号"
+  cells:
+    - name: "param1"
+      type: integer
+      description: "HID マウスボタン番号 (0:L,1:R,2:M…)"
