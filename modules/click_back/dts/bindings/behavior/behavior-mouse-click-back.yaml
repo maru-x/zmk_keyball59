@@ -1,14 +1,24 @@
 description: "Mouse Click Back behavior binding"
 compatible: "zmk,behavior-mouse-click-back"
-binding-cells: 1
+
+# This behavior takes one argument when used in a keymap (e.g., &mcb LCLK)
+binding-cells: 1 # このビヘイビアがキーマップで使用される際に取る引数の数
+
 properties:
+  label: # keymapの mcb ノードで使用されている label プロパティの定義
+    type: string
+    required: true
+    description: "Human-readable name for the behavior instance."
   timeout-ms:
-    type: integer
+    type: int # 'integer' から 'int' に変更 (より一般的)
+    required: true
     description: "レイヤー復帰までのタイムアウト (ms)"
   return-layer:
-    type: integer
+    type: int # 'integer' から 'int' に変更 (より一般的)
+    required: true
     description: "復帰先のレイヤー番号"
-  cells:
-    - name: "param1"
-      type: integer
-      description: "HID マウスボタン番号 (0:L,1:R,2:M…)"
+  "#binding-cells": # keymapの mcb ノードで使用されている #binding-cells プロパティの定義
+    type: int
+    required: true
+    const: 1 # このビヘイビア定義自体が1つのセルを持つことを示す
+    description: "Number of cells for the binding argument this behavior definition itself takes."
