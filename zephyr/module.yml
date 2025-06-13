@@ -5,5 +5,3 @@ build:
   settings:
     dts_root: .
     board_root: .
-modules:
-  - modules/click_back

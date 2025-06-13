@@ -1,0 +1,3 @@
+name: zmk_keyball59
+modules:
+  - modules/click_back
