@@ -1,5 +1,5 @@
 description: "Mouse Click Back behavior binding"
-compatible: "behavior,mouse-click-back"
+compatible: "zmk,behavior-mouse-click-back"
 binding-cells: 1
 properties:
   timeout-ms:
