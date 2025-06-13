@@ -50,20 +50,6 @@
     };
 
     macros {
-        lclk_hold_and_back: lclk_hold_and_back {
-            compatible     = "zmk,behavior-macro";
-            label          = "LCLK_HOLD_AND_BACK";
-            #binding-cells = <0>;
-
-            /* ── バインディングを 1 行ずつ < … > で囲み、最後以外に , ── */
-            bindings =
-                < &macro_press   &mbp LCLK >,        /* 左ボタン DOWN            */
-                < &macro_pause_for_release >,        /* キーリリース待ち         */
-                < &macro_release &mbr LCLK >,        /* 左ボタン UP              */
-                < &macro_wait 500 >,                 /* 0.5 s 待機               */
-                < &to 0 >;                           /* ベースレイヤーへ戻る     */
-        };
-
         L_click_and_back: L_click_and_back {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
