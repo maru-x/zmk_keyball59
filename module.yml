@@ -1,4 +1,5 @@
 name: click_back
+
 build:
   cmake: |
     target_sources(app PRIVATE
@@ -12,5 +13,5 @@ build:
           default y
 
 settings:
-  # ここを app から app/dts に変更
+  # app/dts/bindings 以下を検索
   dts_root: app/dts
