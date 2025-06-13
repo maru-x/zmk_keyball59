@@ -4,9 +4,12 @@ build:
     target_sources(app PRIVATE
       ${CMAKE_CURRENT_SOURCE_DIR}/app/src/behaviors/behavior_mouse_click_back.c
     )
-kconfig:
-  load: app
-  fragment: |
-    config ZMK_BEHAVIOR_MOUSE_CLICK_BACK
-        bool "Mouse Click with Auto-Return"
-        default y
+  kconfig:
+    load: app
+    fragment: |
+      config ZMK_BEHAVIOR_MOUSE_CLICK_BACK
+          bool "Mouse Click with Auto-Return"
+          default y
+  settings:
+    # app 以下の dts/bindings を検索対象にする
+    dts_root: app
