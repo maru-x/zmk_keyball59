@@ -40,7 +40,7 @@
 
         /* 左クリック＋0.5 s でレイヤー0へ戻る */
         mcb: mouse_click_back {
-            compatible    = "behavior,mouse-click-back";
+            compatible    = "zmk,behavior-mouse-click-back";
             timeout-ms    = <500>;   /* 任意変更可 */
             return-layer  = <0>;     /* 任意変更可 */
             /* 引数 = HID マウスボタン番号（0:L, 1:R, 2:M …）。1 個だけ */
