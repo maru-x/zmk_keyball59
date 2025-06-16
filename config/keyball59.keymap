@@ -39,14 +39,14 @@
         };
 
         /* 左クリック＋0.5 s でレイヤー0へ戻る */
-        mcb: mouse_click_back {
-            compatible    = "zmk,behavior-mouse-click-back";
-            timeout-ms    = <500>;   /* 任意変更可 */
-            return-layer  = <0>;     /* 任意変更可 */
+//        mcb: mouse_click_back {
+//            compatible    = "zmk,behavior-mouse-click-back";
+ //           timeout-ms    = <500>;   /* 任意変更可 */
+//            return-layer  = <0>;     /* 任意変更可 */
             /* 引数 = HID マウスボタン番号（0:L, 1:R, 2:M …）。1 個だけ */
-            #binding-cells = <1>;
-            label = "MOUSE_CLICK_BACK";
-        };        
+//            #binding-cells = <1>;
+//            label = "MOUSE_CLICK_BACK";
+//        };        
     };
 
     macros {
@@ -189,7 +189,7 @@
             bindings = <
 &trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans          &trans          &trans
 &trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &cut_and_back   &copy_and_back  &paste_and_back
-&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &mcb 0          &mlt 5 MCLK     &mcb 1
+&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans          &mlt 5 MCLK     &trans
 &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &mkp MB4        &tog 6          &mkp MB5
 &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans                                  &trans          &to 0
             >;
