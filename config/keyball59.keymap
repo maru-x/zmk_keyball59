@@ -42,9 +42,9 @@
         mcb: mouse_click_back {
             compatible    = "zmk,behavior-mouse-click-back";
             timeout-ms    = <500>;   /* 任意変更可 */
-            return-layer  = <0>;     /* 任意変更可 */
+//            return-layer  = <0>;     /* 任意変更可 */
             /* 引数 = HID マウスボタン番号（0:L, 1:R, 2:M …）。1 個だけ */
-            #binding-cells = <1>;
+            #binding-cells = <2>;
             label = "MOUSE_CLICK_BACK";
         };        
     };
@@ -189,7 +189,7 @@
             bindings = <
 &trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans          &trans          &trans
 &trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &cut_and_back   &copy_and_back  &paste_and_back
-&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &mcb LCLK           &mlt 5 MCLK     &mcb RCLK
+&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &mcb MB1 0      &mlt 5 MCLK     &mcb MB2 0
 &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &mkp MB4        &tog 6          &mkp MB5
 &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans                                  &trans          &to 0
             >;
