@@ -45,7 +45,7 @@
 //            return-layer  = <0>;     /* 任意変更可 */
             /* 引数 = HID マウスボタン番号（0:L, 1:R, 2:M …）。1 個だけ */
             #binding-cells = <2>;
-            label = "MOUSE_CLICK_BACK";
+//            label = "MOUSE_CLICK_BACK";
         };        
     };
 
