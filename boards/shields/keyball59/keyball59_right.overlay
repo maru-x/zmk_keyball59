@@ -69,60 +69,60 @@
     };
 };
 
-// &pinctrl {
-//     i2c1_default: i2c1_default {
-//         group1 {
-//             psels = <NRF_PSEL(TWIM_SDA, 0, 10)>,
-//                     <NRF_PSEL(TWIM_SCL, 0, 6)>;
-//         };
-//     };
+&pinctrl {
+    i2c1_default: i2c1_default {
+        group1 {
+            psels = <NRF_PSEL(TWIM_SDA, 0, 10)>,
+                    <NRF_PSEL(TWIM_SCL, 0, 6)>;
+        };
+    };
 
-//     i2c1_sleep: i2c1_sleep {
-//         group1 {
-//             psels = <NRF_PSEL(TWIM_SDA, 0, 10)>,
-//                     <NRF_PSEL(TWIM_SCL, 0, 6)>;
-//             low-power-enable;
-//         };
-//     };
-// };
+    i2c1_sleep: i2c1_sleep {
+        group1 {
+            psels = <NRF_PSEL(TWIM_SDA, 0, 10)>,
+                    <NRF_PSEL(TWIM_SCL, 0, 6)>;
+            low-power-enable;
+        };
+    };
+};
 
-// &i2c1 {
-//     /* 既存ノードの上書き。I²C0 = TWIM0 */
-//     status = "okay";
-//     compatible = "nordic,nrf-twi";   /* 明示しておくと安心 */
-//     pinctrl-0 = <&i2c1_default>;
-//     pinctrl-1 = <&i2c1_sleep>;
-//     pinctrl-names = "default", "sleep";
-// //    clock-frequency = <I2C_BITRATE_STANDARD>; /* 100 kHz */
+&i2c1 {
+    /* 既存ノードの上書き。I²C0 = TWIM0 */
+    status = "okay";
+    compatible = "nordic,nrf-twi";   /* 明示しておくと安心 */
+    pinctrl-0 = <&i2c1_default>;
+    pinctrl-1 = <&i2c1_sleep>;
+    pinctrl-names = "default", "sleep";
+//    clock-frequency = <I2C_BITRATE_STANDARD>; /* 100 kHz */
 
-//     pat912x: pat9126@75 {
-//         compatible = "pixart,pat912x";
-//         reg = <0x75>;                       /* ID_SEL=GND → 0x75 */
-//         motion-gpios = <&gpio1 13 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-//         zephyr,axis-x = <0>;
-//         zephyr,axis-y = <1>;
-//         res-x-cpi = <600>;                  /* 好みに応じて 200-1275 */
-//         res-y-cpi = <600>;
-//         snipe-ticks = <10>;              /* スナイプ時のスクロール量 */
-//         scroll-ticks = <20>;               /* スクロール時のスクロール量 */
-//         automouse_timeout_ms = <5000>;         /* 自動マウスのタイムアウト時間 */
-//         motion-timer-ms = <10>;            /* モーション検出のタイマー間隔 */
-//         ny-min-value = <4>;              /* ノイズ除去最小値 */
+    pat912x: pat9126@75 {
+        compatible = "pixart,pat912x";
+        reg = <0x75>;                       /* ID_SEL=GND → 0x75 */
+        motion-gpios = <&gpio1 13 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        zephyr,axis-x = <0>;
+        zephyr,axis-y = <1>;
+        res-x-cpi = <600>;                  /* 好みに応じて 200-1275 */
+        res-y-cpi = <600>;
+        snipe-ticks = <10>;              /* スナイプ時のスクロール量 */
+        scroll-ticks = <20>;               /* スクロール時のスクロール量 */
+        automouse_timeout_ms = <5000>;         /* 自動マウスのタイムアウト時間 */
+        motion-timer-ms = <10>;            /* モーション検出のタイマー間隔 */
+        ny-min-value = <4>;              /* ノイズ除去最小値 */
 
-//         sleep1-enable;                      /* 低消費電力モード */
-//         sleep2-enable;
-//         sleep1-set-value = <0x77>; /* 低消費電力モードの設定値 */
-//         sleep2-set-value = <0x10>; /* 低消費電力モードの設定値 */
+        sleep1-enable;                      /* 低消費電力モード */
+        sleep2-enable;
+        sleep1-set-value = <0x77>; /* 低消費電力モードの設定値 */
+        sleep2-set-value = <0x10>; /* 低消費電力モードの設定値 */
 
-//         invert-x;                          /* X軸の反転 */
-//         invert-y;                          /* Y軸の反転 */
-//         automouse-layer = <4>;
-//         scroll-layer = <5>;
-//         snipe-layer = <6>;
+        invert-x;                          /* X軸の反転 */
+        invert-y;                          /* Y軸の反転 */
+        automouse-layer = <4>;
+        scroll-layer = <5>;
+        snipe-layer = <6>;
         
-//         /* invert-x; invert-y; も必要なら追加 */
-//     };
-// };
+        /* invert-x; invert-y; も必要なら追加 */
+    };
+};
 
 /*
 &pinctrl {
@@ -188,9 +188,9 @@
 };
 */
 
-// / {
-//     mouse_listener_pat912x {
-//         compatible = "zmk,input-listener";
-//         device = <&pat912x>;
-//     };
-// };
+/ {
+    mouse_listener_pat912x {
+        compatible = "zmk,input-listener";
+        device = <&pat912x>;
+    };
+};
