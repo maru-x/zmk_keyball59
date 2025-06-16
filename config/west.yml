@@ -24,7 +24,7 @@ manifest:
       revision: main
     - name: zmk-mouse-click-back
       remote: mygithub # 自分の GitHub またはローカルパス
-      path: modules/click_back
+      path: modules/zephyr/click_back
       revision: main
   self:
     path: config

@@ -1,12 +1,16 @@
 {
-	"folders": [
-		{
-			"path": ".."
-		},
-		{
-			"name": "pat912x-driver",
-			"path": "../../pat912x-driver"
-		}
-	],
-	"settings": {}
+  "folders": [
+    {
+      "path": ".."
+    },
+    {
+      "name": "pat912x-driver",
+      "path": "../../pat912x-driver"
+    },
+    {
+      "name": "zmk-mouse-click-back",
+      "path": "../../zmk-mouse-click-back"
+    }
+  ],
+  "settings": {}
 }
