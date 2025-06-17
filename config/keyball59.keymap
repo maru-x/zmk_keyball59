@@ -48,7 +48,7 @@
         };
 
         trt: trans_to {
-            compatible = "zmk,behavior-transparent-return-to";
+            compatible = "zmk,behavior-trans-to";
             timeout-ms = <10>;   /* 任意変更可 */
             return-layer = <0>;   /* 任意変更可 */
             #binding-cells = <0>;
