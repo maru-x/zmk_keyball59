@@ -46,13 +46,17 @@
             #binding-cells = <1>;
             /* param1 is button of the mouse to click(0=MB1, 1=MB2, 2=MB3, etc.) */
         };
-
-        trt: trans_to {
-            compatible = "zmk,behavior-trans-to";
-            timeout-ms = <100>;   /* 任意変更可 */
-            return-layer = <0>;   /* 任意変更可 */
-            #binding-cells = <1>;
+        kpl: key_press_to_layer {
+            compatible = "zmk,behavior-key-press-to-layer";
+            #binding-cells = <2>;
         };
+
+        // trt: trans_to {
+        //     compatible = "zmk,behavior-trans-to";
+        //     timeout-ms = <100>;   /* 任意変更可 */
+        //     return-layer = <0>;   /* 任意変更可 */
+        //     #binding-cells = <1>;
+        // };
     };
 
     macros {
@@ -195,7 +199,7 @@
             bindings = <
 &trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans          &trans          &trans
 &trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &cut_and_back   &copy_and_back  &paste_and_back
-&trans  &trans  &trans  &trans  &trans  &trans                  &trt 0   &trans  &trans  &mcb 0          &mlt 5 MCLK     &mcb 1
+&trans  &trans  &trans  &trans  &trans  &trans                  &kpl H 0   &trans  &trans  &mcb 0          &mlt 5 MCLK     &mcb 1
 &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &mkp MB4        &tog 6          &mkp MB5
 &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans                                  &trans          &to 0
             >;
