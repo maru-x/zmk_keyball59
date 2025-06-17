@@ -49,9 +49,9 @@
 
         trt: trans_to {
             compatible = "zmk,behavior-trans-to";
-            timeout-ms = <10>;   /* 任意変更可 */
+            timeout-ms = <100>;   /* 任意変更可 */
             return-layer = <0>;   /* 任意変更可 */
-            #binding-cells = <0>;
+            #binding-cells = <1>;
         };
     };
 
@@ -195,7 +195,7 @@
             bindings = <
 &trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans          &trans          &trans
 &trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &cut_and_back   &copy_and_back  &paste_and_back
-&trans  &trans  &trans  &trans  &trans  &trans                  &trt    &trans  &trans  &mcb 0          &mlt 5 MCLK     &mcb 1
+&trans  &trans  &trans  &trans  &trans  &trans                  &trt 0   &trans  &trans  &mcb 0          &mlt 5 MCLK     &mcb 1
 &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &mkp MB4        &tog 6          &mkp MB5
 &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans                                  &trans          &to 0
             >;
