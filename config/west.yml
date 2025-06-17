@@ -26,5 +26,9 @@ manifest:
       remote: mygithub # 自分の GitHub またはローカルパス
       path: modules/zephyr/click_back
       revision: main
+    - name: zmk-trans-to
+      remote: mygithub # 自分の GitHub またはローカルパス
+      path: modules/zephyr/trans_to
+      revision: main
   self:
     path: config

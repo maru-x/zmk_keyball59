@@ -43,10 +43,16 @@
             compatible    = "zmk,behavior-mouse-click-back";
             timeout-ms    = <1000>;   /* 任意変更可 */
 //          return-layer  = <0>;   /* 任意変更可 */
-            #binding-cells = <1>; 
-            /* param1 is button of the mouse to click(MB1, MB2, MB3, etc.) */
-            /* param2 is the layer to return to after clicking(0,1,2, etc.) */
-        };        
+            #binding-cells = <1>;
+            /* param1 is button of the mouse to click(0=MB1, 1=MB2, 2=MB3, etc.) */
+        };
+
+        trt: transparent_return_to {
+            compatible = "zmk,behavior-transparent-return-to";
+            timeout-ms = <10>;   /* 任意変更可 */
+            return-layer = <0>;   /* 任意変更可 */
+            #binding-cells = <0>;
+        };
     };
 
     macros {
