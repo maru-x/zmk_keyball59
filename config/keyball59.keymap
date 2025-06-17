@@ -47,7 +47,7 @@
             /* param1 is button of the mouse to click(0=MB1, 1=MB2, 2=MB3, etc.) */
         };
 
-        trt: transparent_return_to {
+        trt: trans_to {
             compatible = "zmk,behavior-transparent-return-to";
             timeout-ms = <10>;   /* 任意変更可 */
             return-layer = <0>;   /* 任意変更可 */
@@ -195,7 +195,7 @@
             bindings = <
 &trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans          &trans          &trans
 &trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &cut_and_back   &copy_and_back  &paste_and_back
-&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &mcb 0          &mlt 5 MCLK     &mcb 1
+&trans  &trans  &trans  &trans  &trans  &trans                  &trt    &trans  &trans  &mcb 0          &mlt 5 MCLK     &mcb 1
 &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &mkp MB4        &tog 6          &mkp MB5
 &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans                                  &trans          &to 0
             >;
