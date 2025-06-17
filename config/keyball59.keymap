@@ -156,7 +156,7 @@
             label = "MOUSE";
             bindings = <
 &trans  &kpl N1 0   &kpl N2 0   &kpl N3 0   &kpl N4 0   &kpl N5 0                   &kpl N6 0   &kpl N7 0   &kpl N8 0       &kpl N9 0       &kpl N0 0       &kpl BACKSLASH 0
-&trans  &kpl Q 0    &kpl W 0    &kpl E 0    &kpl R 0    &kpl T 0                    &kpl Y 0    &kpl U 0    &kpl I 0        &cut_and_back   &cppy_and_back  &paste_and_back
+&trans  &kpl Q 0    &kpl W 0    &kpl E 0    &kpl R 0    &kpl T 0                    &kpl Y 0    &kpl U 0    &kpl I 0        &cut_and_back   &copy_and_back  &paste_and_back
 &trans  &kpl A 0    &kpl S 0    &kpl D 0    &kpl F 0    &kpl G 0                    &kpl H 0    &kpl J 0    &kpl K 0        &mcb 0          &mlt 5 MCLK     &mcb 1 
 &trans  &kpl Z 0    &kpl X 0    &kpl C 0    &kpl V 0    &kpl B 0    &trans  &trans  &kpl N 0    &kpl M 0    &kpl COMMA 0    &mkp MB4        &tog 6          &mkp MB5
 &trans  &trans      &trans      &trans      &trans      &trans      &trans  &trans  &trans                                                  &trans          &to 0
