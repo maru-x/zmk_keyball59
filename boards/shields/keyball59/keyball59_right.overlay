@@ -107,7 +107,7 @@
         scroll-ticks = <20>;               /* スクロール時のスクロール量 */
         automouse_timeout_ms = <5000>;         /* 自動マウスのタイムアウト時間 */
         motion-timer-ms = <10>;            /* モーション検出のタイマー間隔 */
-        ny-min-value = <4>;              /* ノイズ除去最小値 */
+        ny-min-value = <8>;              /* ノイズ除去最小値 */
 
         sleep1-enable;                      /* 低消費電力モード */
         sleep2-enable;
