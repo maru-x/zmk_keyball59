@@ -39,18 +39,21 @@
         };
 
         /* 左クリック＋0.5 s でレイヤー0へ戻る */
+
         mcb: mouse_click_back {
-            compatible    = "zmk,behavior-mouse-click-back";
-            timeout-ms    = <1000>;   /* 任意変更可 */
-//          return-layer  = <0>;   /* 任意変更可 */
+            compatible = "zmk,behavior-mouse-click-back";
+            timeout-ms = <1000>;   /* 任意変更可 */
+            //          return-layer  = <0>;   /* 任意変更可 */
+
             #binding-cells = <1>;
+
             /* param1 is button of the mouse to click(0=MB1, 1=MB2, 2=MB3, etc.) */
         };
+
         kpl: key_press_to_layer {
             compatible = "zmk,behavior-key-press-to-layer";
             #binding-cells = <2>;
         };
-
     };
 
     macros {
@@ -115,7 +118,7 @@
 
             sensor-bindings =
                 <&inc_dec_kp LC(PAGE_DOWN) LC(PAGE_UP)>,
-                <&inc_dec_kp PAGE_DOWN PAGE_UP>;
+                <&inc_dec_kp RIGHT LEFT>;
         };
 
         number_layer {
@@ -155,11 +158,11 @@
         mouse_layer {
             label = "MOUSE";
             bindings = <
-&trans  &kpl N1 0   &kpl N2 0   &kpl N3 0   &kpl N4 0   &kpl N5 0                   &kpl N6 0   &kpl N7 0   &kpl N8 0       &kpl N9 0       &kpl N0 0       &kpl BACKSLASH 0
-&trans  &kpl Q 0    &kpl W 0    &kpl E 0    &kpl R 0    &kpl T 0                    &kpl Y 0    &kpl U 0    &kpl I 0        &cut_and_back   &copy_and_back  &paste_and_back
-&trans  &kpl A 0    &kpl S 0    &kpl D 0    &kpl F 0    &kpl G 0                    &kpl H 0    &kpl J 0    &kpl K 0        &mcb 0          &mlt 5 MCLK     &mcb 1 
-&trans  &kpl Z 0    &kpl X 0    &kpl C 0    &kpl V 0    &kpl B 0    &trans  &trans  &kpl N 0    &kpl M 0    &kpl COMMA 0    &mkp MB4        &tog 6          &mkp MB5
-&trans  &trans      &trans      &trans      &trans      &trans      &trans  &trans  &trans                                                  &trans          &to 0
+&trans  &kpl N1 0  &kpl N2 0  &kpl N3 0  &kpl N4 0  &kpl N5 0                  &kpl N6 0  &kpl N7 0  &kpl N8 0     &kpl N9 0      &kpl N0 0       &kpl BACKSLASH 0
+&trans  &kpl Q 0   &kpl W 0   &kpl E 0   &kpl R 0   &kpl T 0                   &kpl Y 0   &kpl U 0   &kpl I 0      &cut_and_back  &copy_and_back  &paste_and_back
+&trans  &kpl A 0   &kpl S 0   &kpl D 0   &kpl F 0   &kpl G 0                   &kpl H 0   &kpl J 0   &kpl K 0      &mcb 0         &mlt 5 MCLK     &mcb 1
+&trans  &kpl Z 0   &kpl X 0   &kpl C 0   &kpl V 0   &kpl B 0   &trans  &trans  &kpl N 0   &kpl M 0   &kpl COMMA 0  &mkp MB4       &tog 6          &mkp MB5
+&trans  &trans     &trans     &trans     &trans     &trans     &trans  &trans  &trans                                             &trans          &to 0
             >;
         };
 
