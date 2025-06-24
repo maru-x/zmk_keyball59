@@ -4,8 +4,8 @@
       "path": ".."
     },
     {
-      "name": "pat912x-driver",
-      "path": "../../pat912x-driver"
+      "name": "zmk-pat9126-driver",
+      "path": "../../pat9126-driver"
     },
     {
       "name": "zmk-mouse-click-back",
@@ -14,3 +14,4 @@
   ],
   "settings": {}
 }
+l

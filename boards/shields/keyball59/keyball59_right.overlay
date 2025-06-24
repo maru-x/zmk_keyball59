@@ -95,8 +95,8 @@
     pinctrl-names = "default", "sleep";
 //    clock-frequency = <I2C_BITRATE_STANDARD>; /* 100 kHz */
 
-    pat912x: pat9126@75 {
-        compatible = "pixart,pat912x";
+    pat9126: pat9126@75 {
+        compatible = "pixart,pat9126";
         reg = <0x75>;                       /* ID_SEL=GND → 0x75 */
         motion-gpios = <&gpio1 13 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
         zephyr,axis-x = <0>;
@@ -189,8 +189,8 @@
 */
 
 / {
-    mouse_listener_pat912x {
+    mouse_listener_pat9126 {
         compatible = "zmk,input-listener";
-        device = <&pat912x>;
+        device = <&pat9126>;
     };
 };

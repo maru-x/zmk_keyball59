@@ -11,10 +11,10 @@ manifest:
       remote: zmkfirmware
       revision: main
       import: app/west.yml
-    - name: pat912x-driver
+    - name: zmk-pat9126-driver
       remote: mygithub # 自分の GitHub またはローカルパス
       revision: main
-      path: modules/zephyr/pat912x
+      path: modules/zephyr/pat9126
     #    - name: zmk-pmw3360-driver
     #      remote: mygithub
     #      revision: main
